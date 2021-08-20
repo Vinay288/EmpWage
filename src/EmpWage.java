@@ -6,7 +6,7 @@ public class EmpWage {
 		final int HOUR_FULLTIME = 8;
 		final int HOUR_PART_TIME = 4;
 		int workedHour = 0, totalWage = 0,totalWorkingHour=0,totalDays=0;
-			while(totalWorkingHour<100 || totalDays<20) {
+			while(totalWorkingHour<100 && totalDays<20) {
 			int attendence = (int) Math.floor((Math.random() * 10) % 3);
 			switch (attendence) {
 			case 0:
