@@ -4,6 +4,7 @@ public class WageComputation {
 	private int fullTimeHour;
 	private int partTimeHour;
 	private String companyName;
+	private int totalWage;
 
 	WageComputation(int wagePerHour, int fullTimeHour, int partTimeHour, String companyName) {
 
@@ -12,9 +13,12 @@ public class WageComputation {
 		this.partTimeHour = partTimeHour;
 		this.companyName = companyName;
 	}
+	public void addCompany(int wagePerHour,int fullTimeHour,int partTimeHour,String companyName) {
+		
+	}
 
 	public void calculateWage() {
-		int workedHour = 0, totalWage = 0, totalWorkingHour = 0, totalDays = 0;
+		int workedHour = 0, totalWorkingHour = 0, totalDays = 0;
 		while (totalWorkingHour < 100 && totalDays < 20) {
 			int attendence = attendence();
 			switch (attendence) {
@@ -64,5 +68,10 @@ public class WageComputation {
 	public void setpartTimeHour(int partTimeHour) {
 		this.partTimeHour = partTimeHour;
 	}
-
+	
+	@Override
+	public String toString()
+	{
+		return "Total employee wage for the company : "+companyName+" is: "+totalWage;
+	}
 }
