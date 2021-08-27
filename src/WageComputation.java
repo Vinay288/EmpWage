@@ -1,23 +1,27 @@
 
 public class WageComputation {
-	private int wagePerHour;
-	private int fullTimeHour;
-	private int partTimeHour;
-	private String companyName;
-	private int totalWage;
+	private int numberOfCompany = 0;
+	private WageComputationObject wageComputationArray[];
 
-	WageComputation(int wagePerHour, int fullTimeHour, int partTimeHour, String companyName) {
+	WageComputation() {
 
-		this.wagePerHour = wagePerHour;
-		this.fullTimeHour = fullTimeHour;
-		this.partTimeHour = partTimeHour;
-		this.companyName = companyName;
+		wageComputationArray = new WageComputationObject[5];
 	}
-	public void addCompany(int wagePerHour,int fullTimeHour,int partTimeHour,String companyName) {
-		
+
+	public void addCompany(int wagePerHour, int fullTimeHour, int partTimeHour, String companyName) {
+		wageComputationArray[numberOfCompany] = new WageComputationObject(wagePerHour, fullTimeHour, partTimeHour,
+				companyName);
+		numberOfCompany++;
 	}
 
 	public void calculateWage() {
+		for (int i = 0; i < numberOfCompany; i++) {
+			wageComputationArray[i].setTotalWage(this.calculateWage(wageComputationArray[i]));
+			System.out.println(wageComputationArray[i]);
+		}
+	}
+
+	public int calculateWage(WageComputationObject wageComputationObject) {
 		int workedHour = 0, totalWorkingHour = 0, totalDays = 0;
 		while (totalWorkingHour < 100 && totalDays < 20) {
 			int attendence = attendence();
@@ -26,52 +30,23 @@ public class WageComputation {
 				workedHour = 0;
 				break;
 			case 1:
-				workedHour = fullTimeHour;
+				workedHour = wageComputationObject.fullTimeHour;
 				break;
 			case 2:
-				workedHour = partTimeHour;
+				workedHour = wageComputationObject.partTimeHour;
 				break;
 			default:
 				System.out.println("error");
 			}
 			totalWorkingHour = totalWorkingHour + workedHour;
 			totalDays++;
-			totalWage = totalWage + wagePerHour * workedHour * attendence;
+			;
 		}
-		System.out.println("emp wage of " + this.companyName + " is " + totalWage);
+		return totalWorkingHour * wageComputationObject.wagePerHour;
 	}
 
 	public int attendence() {
 		return (int) Math.floor((Math.random() * 10) % 3);
 	}
 
-	public int getWagePerHour() {
-		return wagePerHour;
-	}
-
-	public void setWagePerHour(int wagePerHour) {
-		this.wagePerHour = wagePerHour;
-	}
-
-	public int getFullTimeHour() {
-		return fullTimeHour;
-	}
-
-	public void setfullTimeHour(int fullTimeHour) {
-		this.fullTimeHour = fullTimeHour;
-	}
-
-	public int getPartTimeHour() {
-		return partTimeHour;
-	}
-
-	public void setpartTimeHour(int partTimeHour) {
-		this.partTimeHour = partTimeHour;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return "Total employee wage for the company : "+companyName+" is: "+totalWage;
-	}
 }
