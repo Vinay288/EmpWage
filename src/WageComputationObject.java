@@ -22,5 +22,4 @@ public class WageComputationObject {
 	public String toString() {
 		return "Total employee wage for the company : " + companyName + " is: " + totalWage;
 	}
-
 }
